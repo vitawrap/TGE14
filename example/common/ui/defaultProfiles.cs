@@ -284,7 +284,6 @@ if(!isObject(GuiTextListProfile)) new GuiControlProfile (GuiTextListProfile : Gu
 
 if(!isObject(GuiBaseTreeViewProfile)) new GuiControlProfile (GuiBaseTreeViewProfile)
 {
-   fontSize = 13;  // dhc - trying a better fit...
    fontColor = "0 0 0";
    fontColorHL = "64 150 150";
    canKeyFocus = true;
