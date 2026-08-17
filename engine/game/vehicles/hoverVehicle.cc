@@ -512,7 +512,7 @@ F32 HoverVehicle::getBaseStabilizerLength() const
    F32 velLength  = mRigid.linVelocity.len();
    F32 minVel     = getMin(velLength, mDataBlock->maxThrustSpeed);
    F32 velDiff    = mDataBlock->maxThrustSpeed - minVel;
-   F32 velRatio   = velDiff / mDataBlock->maxThrustSpeed;
+   F32 velRatio   = mDataBlock->maxThrustSpeed != 0.0f ? (velDiff / mDataBlock->maxThrustSpeed) : 0.0f;
    F32 inc        = lengthDiff * ( 1.0 - velRatio );
    base += inc;
 
