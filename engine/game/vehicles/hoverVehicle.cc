@@ -532,11 +532,10 @@ struct StabPoint
 
 void HoverVehicle::updateForces(F32 /*dt*/)
 {
-   Point3F gravForce(0, 0, sHoverVehicleGravity * mRigid.mass * mGravityMod);
+   Point3F gravForce(0, 0, sHoverVehicleGravity /* * mRigid.mass */ * mGravityMod);
 
    MatrixF currTransform;
    mRigid.getTransform(&currTransform);
-   mRigid.atRest = false;
 
    mThrustLevel = (mForwardThrust * mDataBlock->mainThrustForce    +
                    mReverseThrust * mDataBlock->reverseThrustForce +
@@ -739,7 +738,7 @@ void HoverVehicle::updateForces(F32 /*dt*/)
    force += mAppliedForce;
 
    // Container buoyancy & drag
-   force  += Point3F(0, 0,-mBuoyancy * sHoverVehicleGravity * mRigid.mass * mGravityMod);
+   force  += Point3F(0, 0,-mBuoyancy * sHoverVehicleGravity * mGravityMod);
    force  -= mRigid.linVelocity * mDrag;
    torque -= mRigid.angMomentum * mDrag;
 
