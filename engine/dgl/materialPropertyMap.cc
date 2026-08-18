@@ -46,7 +46,7 @@ const MaterialPropertyMap::MapEntry* MaterialPropertyMap::getMapEntry(StringTabl
 const MaterialPropertyMap::MapEntry* MaterialPropertyMap::getMapEntryFromIndex(S32 index) const
 {
    const MapEntry* ret = NULL;
-   if(index < mMapEntries.size())
+   if((index >= 0) && (index < mMapEntries.size()))
       ret = &mMapEntries[index];
    return ret;
 }
