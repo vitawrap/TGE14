@@ -177,6 +177,9 @@ class HoverVehicle : public Vehicle
    U32 getCollisionMask();
    void updateJet(F32 dt);
    void updateEmitter(bool active,F32 dt,ParticleEmitterData *emitter,S32 idx,S32 count);
+
+   // HoverVehicle relies on old rigid behavior, without resting.
+   virtual bool rigidCanRest() const { return false; }
   public:
    HoverVehicle();
    ~HoverVehicle();
