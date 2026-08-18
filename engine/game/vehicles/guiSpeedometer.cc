@@ -23,7 +23,7 @@ class GuiSpeedometerHud : public GuiBitmapCtrl
    F32   mMaxSpeed;     ///< Max speed at max need pos
    F32   mMaxAngle;     ///< Max pos of needle
    F32   mMinAngle;     ///< Min pos of needle
-   Point2F mCenter;     ///< Center of needle rotation
+   Point2F mNeedleCenter; ///< Center of needle rotation
    ColorF mColor;       ///< Needle Color
    F32   mNeedleLength;
    F32   mNeedleWidth;
@@ -48,7 +48,7 @@ GuiSpeedometerHud::GuiSpeedometerHud()
    mMaxSpeed = 100;
    mMaxAngle = 0;
    mMinAngle = 200;
-   mCenter.set(0,0);
+   mNeedleCenter.set(0,0);
    mNeedleWidth = 3;
    mNeedleLength = 10;
    mTailLength = 5;
@@ -64,7 +64,7 @@ void GuiSpeedometerHud::initPersistFields()
    addField("minAngle", TypeF32, Offset( mMinAngle, GuiSpeedometerHud ) );
    addField("maxAngle", TypeF32, Offset( mMaxAngle, GuiSpeedometerHud ) );
    addField("color", TypeColorF, Offset( mColor, GuiSpeedometerHud ) );
-   addField("center", TypePoint2F, Offset( mCenter, GuiSpeedometerHud ) );
+   addField("needleCenter", TypePoint2F, Offset( mNeedleCenter, GuiSpeedometerHud ) );
    addField("length", TypeF32, Offset( mNeedleLength, GuiSpeedometerHud ) );
    addField("width", TypeF32, Offset( mNeedleWidth, GuiSpeedometerHud ) );
    addField("tail", TypeF32, Offset( mTailLength, GuiSpeedometerHud ) );
@@ -96,7 +96,7 @@ void GuiSpeedometerHud::onRender(Point2I offset, const RectI &updateRect)
 
    // Render the needle
    glPushMatrix();
-   Point2F center = mCenter;
+   Point2F center = mNeedleCenter;
    if (center.x == F32(0) && center.y == F32(0)) {
       center.x = mBounds.extent.x / 2;
       center.y = mBounds.extent.y / 2;
