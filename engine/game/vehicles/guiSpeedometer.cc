@@ -23,6 +23,7 @@ class GuiSpeedometerHud : public GuiBitmapCtrl
    F32   mMaxSpeed;     ///< Max speed at max need pos
    F32   mMaxAngle;     ///< Max pos of needle
    F32   mMinAngle;     ///< Min pos of needle
+   F32   mNeedleTaper;  ///< Needle taper factor
    Point2F mNeedleCenter; ///< Center of needle rotation
    ColorF mColor;       ///< Needle Color
    F32   mNeedleLength;
@@ -48,6 +49,7 @@ GuiSpeedometerHud::GuiSpeedometerHud()
    mMaxSpeed = 100;
    mMaxAngle = 0;
    mMinAngle = 200;
+   mNeedleTaper = 0.f;
    mNeedleCenter.set(0,0);
    mNeedleWidth = 3;
    mNeedleLength = 10;
@@ -64,6 +66,7 @@ void GuiSpeedometerHud::initPersistFields()
    addField("minAngle", TypeF32, Offset( mMinAngle, GuiSpeedometerHud ) );
    addField("maxAngle", TypeF32, Offset( mMaxAngle, GuiSpeedometerHud ) );
    addField("color", TypeColorF, Offset( mColor, GuiSpeedometerHud ) );
+   addField("needleTaper", TypeF32, Offset( mNeedleTaper, GuiSpeedometerHud ));
    addField("needleCenter", TypePoint2F, Offset( mNeedleCenter, GuiSpeedometerHud ) );
    addField("length", TypeF32, Offset( mNeedleLength, GuiSpeedometerHud ) );
    addField("width", TypeF32, Offset( mNeedleWidth, GuiSpeedometerHud ) );
@@ -110,10 +113,11 @@ void GuiSpeedometerHud::onRender(Point2I offset, const RectI &updateRect)
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
 
+   F32 taper = 1.f - mNeedleTaper;
    glColor4f(mColor.red, mColor.green, mColor.blue, mColor.alpha);
    glBegin(GL_TRIANGLE_STRIP);
-      glVertex2f(+mNeedleLength,-mNeedleWidth);
-      glVertex2f(+mNeedleLength,+mNeedleWidth);
+      glVertex2f(+mNeedleLength,-mNeedleWidth * taper);
+      glVertex2f(+mNeedleLength,+mNeedleWidth * taper);
       glVertex2f(-mTailLength ,-mNeedleWidth);
       glVertex2f(-mTailLength ,+mNeedleWidth);
    glEnd();
