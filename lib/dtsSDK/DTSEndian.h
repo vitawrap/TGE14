@@ -62,6 +62,12 @@ namespace DTS
       return (unsigned int&)FIX_ENDIAN( int(val));
    }
 
+   // x64 catch-all for size_t (must be narrowed down to int)
+   inline unsigned int & FIX_ENDIAN(unsigned long long val)
+   {
+       return (unsigned int&)FIX_ENDIAN( int(val));
+   }
+
    inline float & FIX_ENDIAN(float val)
    {
       if (!isLittleEndian())
