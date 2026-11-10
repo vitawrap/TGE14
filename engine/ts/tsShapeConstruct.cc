@@ -19,8 +19,11 @@ S32 gTransTransforms = 0;
 TSShapeConstructor::TSShapeConstructor()
 {
    mShape = NULL;
-   for (S32 i = 0; i<MaxSequences; i++)
+   for (S32 i = 0; i<MaxSequences; i++) {
       mSequence[i] = NULL;
+      mPriority[i] = -1;
+      mCyclic[i] = -1;
+   }
 }
 
 TSShapeConstructor::~TSShapeConstructor()
@@ -82,6 +85,18 @@ bool TSShapeConstructor::preload(bool server, char errorBuffer[ErrorBufferSize])
             return false;
          }
          ResourceManager->closeStream(f);
+
+         // Priority for the newly added sequence may be overridden by user
+         if (mPriority[i] != -1) {
+            shape->sequences.last().priority = mPriority[i];
+         }
+         // Cyclic flag for the newly added sequence may be overridden by user
+         if (mCyclic[i] != -1) {
+            if (mCyclic[i])
+                shape->sequences.last().flags |= TSShape::Cyclic;
+            else
+                shape->sequences.last().flags &= ~TSShape::Cyclic;
+         }
 
          // if there was a space or tab in mSequence[i], then a new name was supplied for it
          // change it here...will still be in fileBuf
@@ -175,7 +190,7 @@ void TSShapeConstructor::initPersistFields()
    Parent::initPersistFields();
    addGroup("Media");	
    addField("baseShape", TypeFilename, Offset(mShape, TSShapeConstructor));
-   endGroup("Media");	
+   endGroup("Media");
 
    /*
     New code! The old code allocated one field per sequence offset... syntax evolves from
@@ -183,6 +198,8 @@ void TSShapeConstructor::initPersistFields()
    */
    addGroup("Sequences");
    addField("sequence", TypeFilename, Offset(mSequence, TSShapeConstructor), MaxSequences);
+   addField("priority", TypeS32,      Offset(mPriority, TSShapeConstructor), MaxSequences);
+   addField("cyclic",   TypeS32,      Offset(mCyclic,   TSShapeConstructor), MaxSequences);
    endGroup("Sequences");
 }
 

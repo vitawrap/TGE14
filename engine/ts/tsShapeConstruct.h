@@ -30,6 +30,8 @@ class TSShapeConstructor : public SimDataBlock
 
    StringTableEntry mShape;
    StringTableEntry mSequence[MaxSequences];
+   S32 mPriority[MaxSequences];
+   S32 mCyclic[MaxSequences];
 
    Resource<TSShape> hShape;
 
