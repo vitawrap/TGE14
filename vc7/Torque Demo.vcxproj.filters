@@ -1199,9 +1199,6 @@
     <ClCompile Include="..\engine\game\fx\fxBeam.cc">
       <Filter>Source Files\game\fx</Filter>
     </ClCompile>
-    <ClCompile Include="..\engine\ts\tsShapeGLBRead.cc">
-      <Filter>Source Files\ts</Filter>
-    </ClCompile>
     <ClCompile Include="..\engine\mimalloc\alloc.c">
       <Filter>Source Files\mimalloc</Filter>
     </ClCompile>

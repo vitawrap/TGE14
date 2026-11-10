@@ -13,8 +13,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\../lib/out.VC7.DEBUG"
-			IntermediateDirectory=".\../lib/out.VC7.DEBUG/dtsSDKPlus"
+			OutputDirectory=".\../lib/out.VC6.DEBUG"
+			IntermediateDirectory=".\../lib/out.VC6.DEBUG/dtsSDKPlus"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -27,10 +27,10 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
-				PrecompiledHeaderFile=".\../lib/out.VC7.DEBUG/dtsSDKPlus/dtsSDKPlus.pch"
-				AssemblerListingLocation=".\../lib/out.VC7.DEBUG/dtsSDKPlus/"
-				ObjectFile=".\../lib/out.VC7.DEBUG/dtsSDKPlus/"
-				ProgramDataBaseFileName=".\../lib/out.VC7.DEBUG/dtsSDKPlus/"
+				PrecompiledHeaderFile=".\../lib/out.VC6.DEBUG/dtsSDKPlus/dtsSDKPlus.pch"
+				AssemblerListingLocation=".\../lib/out.VC6.DEBUG/dtsSDKPlus/"
+				ObjectFile=".\../lib/out.VC6.DEBUG/dtsSDKPlus/"
+				ProgramDataBaseFileName=".\../lib/out.VC6.DEBUG/dtsSDKPlus/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				DebugInformationFormat="4"
@@ -39,7 +39,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="../lib/out.VC7.DEBUG/dtsSDKPlus_DEBUG.lib"
+				OutputFile="../lib/out.VC6.DEBUG/dtsSDKPlus_DEBUG.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -64,8 +64,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\../lib/out.VC7.RELEASE"
-			IntermediateDirectory=".\../lib/out.VC7.RELEASE/dtsSDKPlus"
+			OutputDirectory=".\../lib/out.VC6.RELEASE"
+			IntermediateDirectory=".\../lib/out.VC6.RELEASE/dtsSDKPlus"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -80,10 +80,10 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="TRUE"
 				UsePrecompiledHeader="2"
-				PrecompiledHeaderFile=".\../lib/out.VC7.RELEASE/dtsSDKPlus/dtsSDKPlus.pch"
-				AssemblerListingLocation=".\../lib/out.VC7.RELEASE/dtsSDKPlus/"
-				ObjectFile=".\../lib/out.VC7.RELEASE/dtsSDKPlus/"
-				ProgramDataBaseFileName=".\../lib/out.VC7.RELEASE/dtsSDKPlus/"
+				PrecompiledHeaderFile=".\../lib/out.VC6.RELEASE/dtsSDKPlus/dtsSDKPlus.pch"
+				AssemblerListingLocation=".\../lib/out.VC6.RELEASE/dtsSDKPlus/"
+				ObjectFile=".\../lib/out.VC6.RELEASE/dtsSDKPlus/"
+				ProgramDataBaseFileName=".\../lib/out.VC6.RELEASE/dtsSDKPlus/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				CompileAs="0"/>
@@ -91,7 +91,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile=".\../lib/out.VC7.RELEASE\dtsSDKPlus.lib"
+				OutputFile=".\../lib/out.VC6.RELEASE\dtsSDKPlus.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -116,8 +116,8 @@
 		</Configuration>
 		<Configuration
 			Name="Hybrid|Win32"
-			OutputDirectory=".\../lib/out.VC7.HYBRID"
-			IntermediateDirectory=".\../lib/out.VC7.HYBRID/dtsSDKPlus"
+			OutputDirectory=".\../lib/out.VC6.HYBRID"
+			IntermediateDirectory=".\../lib/out.VC6.HYBRID/dtsSDKPlus"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
@@ -129,10 +129,10 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
-				PrecompiledHeaderFile=".\../lib/out.VC7.HYBRID/dtsSDKPlus/dtsSDKPlus.pch"
-				AssemblerListingLocation=".\../lib/out.VC7.HYBRID/dtsSDKPlus/"
-				ObjectFile=".\../lib/out.VC7.HYBRID/dtsSDKPlus/"
-				ProgramDataBaseFileName=".\../lib/out.VC7.HYBRID/dtsSDKPlus/"
+				PrecompiledHeaderFile=".\../lib/out.VC6.HYBRID/dtsSDKPlus/dtsSDKPlus.pch"
+				AssemblerListingLocation=".\../lib/out.VC6.HYBRID/dtsSDKPlus/"
+				ObjectFile=".\../lib/out.VC6.HYBRID/dtsSDKPlus/"
+				ProgramDataBaseFileName=".\../lib/out.VC6.HYBRID/dtsSDKPlus/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				DebugInformationFormat="4"
@@ -141,7 +141,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile=".\../lib/out.VC7.HYBRID\dtsSDKPlus.lib"
+				OutputFile=".\../lib/out.VC6.HYBRID\dtsSDKPlus.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>

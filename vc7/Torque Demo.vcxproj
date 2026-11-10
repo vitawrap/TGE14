@@ -163,7 +163,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WINMM.LIB;WSOCK32.LIB;ljpeg_DEBUG.lib;lpng_DEBUG.lib;lungif_DEBUG.lib;zlib_DEBUG.lib;vfw32.lib;ogg_static.lib;theora_static.lib;vorbis_static.lib;Imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WINMM.LIB;WSOCK32.LIB;dtsSDK_DEBUG.lib;dtsSDKPlus_DEBUG.lib;ljpeg_DEBUG.lib;lpng_DEBUG.lib;lungif_DEBUG.lib;zlib_DEBUG.lib;vfw32.lib;ogg_static.lib;theora_static.lib;vorbis_static.lib;Imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../example/$(TargetName).exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../lib/xiph/win64;../lib/SDL/win32;../lib/out.VC6.DEBUG;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -253,7 +253,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WINMM.LIB;WSOCK32.LIB;ljpeg.lib;lpng.lib;lungif.lib;zlib.lib;vfw32.lib;ogg_static.lib;theora_static.lib;vorbis_static.lib;Imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WINMM.LIB;WSOCK32.LIB;dtsSDK.lib;dtsSDKPlus.lib;ljpeg.lib;lpng.lib;lungif.lib;zlib.lib;vfw32.lib;ogg_static.lib;theora_static.lib;vorbis_static.lib;Imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../example/$(TargetName).exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../lib/xiph/win64;../lib/out.VC6.RELEASE;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -648,7 +648,6 @@
     <ClCompile Include="..\engine\ts\tsPartInstance.cc" />
     <ClCompile Include="..\engine\ts\tsShape.cc" />
     <ClCompile Include="..\engine\ts\tsShapeAlloc.cc" />
-    <ClCompile Include="..\engine\ts\tsShapeGLBRead.cc" />
     <ClCompile Include="..\engine\ts\tsShapeConstruct.cc" />
     <ClCompile Include="..\engine\ts\tsShapeInstance.cc" />
     <ClCompile Include="..\engine\ts\tsShapeOldRead.cc" />
@@ -1041,6 +1040,12 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="dtsSDK.vcxproj">
+      <Project>{8b33f5f9-41a2-4365-8310-c52be51b0d97}</Project>
+    </ProjectReference>
+    <ProjectReference Include="dtsSDKPlus.vcxproj">
+      <Project>{91e7c69d-603f-4982-b76a-a03334609110}</Project>
+    </ProjectReference>
     <ProjectReference Include="ljpeg.vcxproj">
       <Project>{15521b64-0586-4404-9cf8-9590c13615b9}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
