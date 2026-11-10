@@ -26,13 +26,13 @@ namespace DTS
    template <class T>
    inline void delElement(std::vector<T> & vec, S32 idx)
    {
-      std::vector<T>::iterator itr = (std::vector<T>::iterator)&vec[idx];
+      std::vector<T>::iterator itr = vec.begin() + idx;
       vec.erase(itr);
    }
    template <class T>
    inline void insElement(std::vector<T> & vec, S32 idx, const T & el) 
    {
-      std::vector<T>::iterator itr = (std::vector<T>::iterator)&vec[idx];
+      std::vector<T>::iterator itr = vec.begin() + idx;
       vec.insert(itr,el);
    }
 
