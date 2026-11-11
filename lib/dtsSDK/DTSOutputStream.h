@@ -418,6 +418,7 @@ namespace DTS
       // Write the resulting data to the file
 
       std::streampos pos = out.tellp() ;
+      if (pos == -1) pos = 0; // 0 if the initial query fails to mute the assert
       out.write ((char *) &FIX_ENDIAN(DTSVersion), 4) ;
       out.write ((char *) &FIX_ENDIAN(totalSize), 4) ;
       out.write ((char *) &FIX_ENDIAN(offset16), 4) ;
@@ -428,7 +429,6 @@ namespace DTS
       std::streampos endpos = out.tellp() ;
 
       assert ((endpos - pos) == (std::streampos)(4*Used32 + 2*Used16 + 1*Used8 + 16)) ;
-
    }
    
 }
