@@ -650,6 +650,7 @@
     <ClCompile Include="..\engine\ts\tsShapeAlloc.cc" />
     <ClCompile Include="..\engine\ts\tsShapeConstruct.cc" />
     <ClCompile Include="..\engine\ts\tsShapeInstance.cc" />
+    <ClCompile Include="..\engine\ts\tsShapeOBJRead.cc" />
     <ClCompile Include="..\engine\ts\tsShapeOldRead.cc" />
     <ClCompile Include="..\engine\ts\tsSortedMesh.cc" />
     <ClCompile Include="..\engine\ts\tsThread.cc" />

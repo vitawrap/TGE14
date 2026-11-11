@@ -1274,6 +1274,9 @@
     <ClCompile Include="..\engine\gui\game\guiLiquidGlass.cc">
       <Filter>Source Files\gui\game</Filter>
     </ClCompile>
+    <ClCompile Include="..\engine\ts\tsShapeOBJRead.cc">
+      <Filter>Source Files\ts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\engine\collision\abstractPolyList.h">

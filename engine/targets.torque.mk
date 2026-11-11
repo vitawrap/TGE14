@@ -494,6 +494,7 @@ SOURCE.TS=\
 	ts/tsShapeConstruct.cc \
 	ts/tsShapeGLBRead.cc \
 	ts/tsShapeInstance.cc \
+	ts/tsShapeOBJRead.cc \
 	ts/tsShapeOldRead.cc \
 	ts/tsSortedMesh.cc \
 	ts/tsThread.cc \
