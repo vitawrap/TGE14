@@ -146,11 +146,11 @@ namespace DTS {
                         if (mObjMaterial != -1)
                             mObjMaterials[mObjMaterial].reflection = metalness;
                     }
-                    else if (dStrcmp(type, "illum") == 0) // Self-illumination factor
+                    else if (dStrcmp(type, "illum") == 0) // Self-illumination config
                     {
                         F32 illum;
                         dSscanf(start, "%f", &illum);
-                        if (illum >= 1.f && mObjMaterial != -1)
+                        if (illum == 1.f && mObjMaterial != -1)
                             mObjMaterials[mObjMaterial].shadeless = true;
                     }
                     else if (dStrcmp(type, "map_Kd") == 0) // Diffuse texture name
