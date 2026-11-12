@@ -43,29 +43,138 @@ namespace DTS {
         std::vector<Point> mObjNormals;
         std::vector<Point2D> mObjTexcoord;
 
-        struct Face { S32 v[3], n[3], t[3]; };
+        struct Face { S32 v[3], n[3], t[3]; S32 material; };
         std::vector<Face> mObjFaces;
+        std::string mObjMaterialLib;
+        bool mObjNeedDefaultMaterial;
 
+        struct OBJMaterial {
+            std::string name;
+            std::string diffuse;
+            float reflection;
+            bool shadeless : 1;
+            bool translucent : 1;
+            OBJMaterial(char const* name) :
+                name(name), diffuse("white"), reflection(0.f),
+                shadeless(false), translucent(false)
+            {}
+        };
+        std::vector<OBJMaterial> mObjMaterials;
+        S32 mObjMaterial;
+
+        static const int lineMaxSize = 1024;
     public:
+        static char* skipWS(char* start) {
+            S32 lspace = 0;
+            if (lspace = dStrspn(start, " \t"))
+                lspace += dStrcspn(start, " \t");
+            if (lspace < lineMaxSize && (start[lspace] == '#' || start[lspace] == '\0'))
+                return NULL; // This is a comment or a blank line
+
+            start += lspace;
+            return start;
+        }
+
+        S32 getOBJMaterial(std::string const& name)
+        {
+            for (S32 i = 0; i < mObjMaterials.size(); ++i)
+                if (mObjMaterials[i].name == name)
+                    return i;
+            mObjMaterials.push_back(OBJMaterial(name.c_str()));
+            return mObjMaterials.size() - 1;
+        }
+
+        void parseMaterialLib(Stream* s)
+        {
+            char assetPath[1024];
+            if (FileStream* fs = dynamic_cast<FileStream*>(s)) {
+                dSprintf(assetPath, 1024, fs->getFilename());
+                if (char* dir = dStrrchr(assetPath, '/'))
+                    dSprintf(dir+1, 1024 - ((dir+1) - assetPath), "%s", mObjMaterialLib.c_str());
+            } else
+                dSprintf(assetPath, 1024, "%s", mObjMaterialLib.c_str());
+            Stream* f = ResourceManager->openStream(assetPath);
+            if (!f || f->getStatus() != Stream::Ok)
+            {
+                Con::warnf("OBJ file declares material library \"%s\" but it doesn't exist!", assetPath);
+                return;
+            }
+            char line[lineMaxSize];
+            static char relFile[512];
+            while (f->getStatus() != Stream::EOS) {
+                f->readLine((U8*) line, lineMaxSize);
+                char* start = skipWS(line);
+                if (!start) continue; // not a line we keep
+
+                char type[8]; // line type (f, v, vt, vn ...)
+                S32 valuesStart = 0;
+                S32 hasLineType = dSscanf(start, "%7s %n", type, &valuesStart);
+                if (hasLineType) {
+                    start += valuesStart;
+
+                    if (dStrcmp(type, "newmtl") == 0) // New named material entry
+                    {
+                        dSprintf(relFile, 512, "%s", start);
+                        mObjMaterial = getOBJMaterial(relFile);
+                    }
+                    else if (dStrcmp(type, "d") == 0) // Dissolve (1 is opaque)
+                    {
+                        F32 dissolve;
+                        dSscanf(start, "%f", &dissolve);
+                        if (dissolve < 1.f && mObjMaterial != -1)
+                            mObjMaterials[mObjMaterial].translucent = true;
+                    }
+                    else if (dStrcmp(type, "Tr") == 0) // Translucency (0 is opaque)
+                    {
+                        F32 trans;
+                        dSscanf(start, "%f", &trans);
+                        if (trans > 0.f && mObjMaterial != -1)
+                            mObjMaterials[mObjMaterial].translucent = true;
+                    }
+                    else if (dStrcmp(type, "Ns") == 0) // Shininess (generally exp 0 to 1000)
+                    {
+                        F32 shininess;
+                        dSscanf(start, "%f", &shininess);
+                        shininess = mLog(getMin(shininess * 0.001f, 1.f));
+                        if (mObjMaterial != -1)
+                            mObjMaterials[mObjMaterial].reflection = shininess;
+                    }
+                    else if (dStrcmp(type, "Pm") == 0) // PBR metalness (unofficial)
+                    {
+                        F32 metalness;
+                        dSscanf(start, "%f", &metalness);
+                        if (mObjMaterial != -1)
+                            mObjMaterials[mObjMaterial].reflection = metalness;
+                    }
+                    else if (dStrcmp(type, "illum") == 0) // Self-illumination factor
+                    {
+                        F32 illum;
+                        dSscanf(start, "%f", &illum);
+                        if (illum >= 1.f && mObjMaterial != -1)
+                            mObjMaterials[mObjMaterial].shadeless = true;
+                    }
+                    else if (dStrcmp(type, "map_Kd") == 0) // Diffuse texture name
+                    {
+                        dSprintf(relFile, 512, "%s", start);
+                        if (mObjMaterial != -1)
+                            mObjMaterials[mObjMaterial].diffuse = relFile;
+                    }
+                }
+            }
+            ResourceManager->closeStream(f);
+        }
+
         void parse(Stream& s)
         {
-            const int lineMaxSize = 1024;
             char line[lineMaxSize];
             while (s.getStatus() != Stream::EOS) {
                 s.readLine((U8*) line, lineMaxSize);
-                char* start = line;
-
-                S32 lspace = 0;
-                if (lspace = dStrspn(start, " \t"))
-                    lspace += dStrcspn(start, " \t");
-                if (lspace < lineMaxSize && (start[lspace] == '#' || start[lspace] == '\0'))
-                    continue; // This is a comment or a blank line
+                char* start = skipWS(line);
+                if (!start) continue; // not a line we keep
                 
-                start += lspace;
-                
-                char type[3]; // line type (f, v, vt, vn ...)
+                char type[8]; // line type (f, v, vt, vn ...)
                 S32 valuesStart = 0;
-                S32 hasLineType = dSscanf(start, "%2s %n", type, &valuesStart);
+                S32 hasLineType = dSscanf(start, "%7s %n", type, &valuesStart);
                 if (hasLineType) {
                     start += valuesStart;
 
@@ -79,7 +188,7 @@ namespace DTS {
                     {
                         F32 s, t;
                         dSscanf(start, "%f %f", &s, &t);
-                        mObjTexcoord.emplace_back(s, t);
+                        mObjTexcoord.emplace_back(s, 1.f-t); // flip T UV
                     }
                     else if (dStrcmp(type, "vn") == 0) // normal
                     {
@@ -120,18 +229,34 @@ namespace DTS {
                                 face.v[i] = vert-1;
                                 face.n[i] = norm-1;
                                 face.t[i] = texc-1;
+                                face.material = mObjMaterial;
                             }
                             mObjFaces.push_back(dMove(face));
                         }
+                    }
+                    else if (dStrcmp(type, "usemtl") == 0) // use (or create) material
+                    {
+                        static char relFile[512];
+                        dSprintf(relFile, 512, "%s", start);
+                        mObjMaterial = getOBJMaterial(relFile); // declare material
+                    }
+                    else if (dStrcmp(type, "mtllib") == 0) // material library
+                    {
+                        static char relFile[512];
+                        dSprintf(relFile, 512, "%s", start);
+                        mObjMaterialLib = relFile;
                     }
                 }
             }
         }
 
-        OBJShape(Stream& s)
+        OBJShape(Stream& s) :
+            mObjMaterial(-1), mObjNeedDefaultMaterial(false)
         {
-            // this fills the mObj* vectors.
+            // these fill the mObj* vectors.
             parse(s);
+            if (mObjMaterialLib.length())
+                parseMaterialLib(&s);
 
             // OBJ models have no node hierarchy, but shapes need at least one root node.
             Node n;
@@ -198,28 +323,45 @@ namespace DTS {
             calculateRadius();
             calculateTubeRadius();
 
-            // Finally, create the material for the mesh
+            // Finally, create the materials for the mesh
             Material mat;
-            mat.name        = "white";
-            mat.flags       = Material::NeverEnvMap;
-            mat.reflectance = -1;
-            mat.bump        = -1;
-            mat.detail      = -1;
-            mat.reflection  = 1.0f;
-            mat.detailScale = 1.0f;
-            materials.push_back(mat);
+            if (mObjNeedDefaultMaterial) {
+                mat.name        = "white";
+                mat.flags       = Material::NeverEnvMap;
+                mat.reflectance = -1;
+                mat.bump        = -1;
+                mat.detail      = -1;
+                mat.reflection  = 1.0f;
+                mat.detailScale = 1.0f;
+                materials.push_back(mat);
+            }
+            for (S32 i = 0; i < mObjMaterials.size(); ++i) {
+                auto& objmtl = mObjMaterials[i];
+                mat.name        = objmtl.diffuse; // should be same relative path format as DTS
+                mat.flags       = Material::SWrap|Material::TWrap|Material::NeverEnvMap;
+                mat.reflectance = materials.size();
+                mat.bump        = -1;
+                mat.detail      = -1;
+                mat.reflection  = objmtl.reflection;
+                mat.detailScale = 1.0f;
+                if (objmtl.reflection > 0.f) mat.flags &= ~Material::NeverEnvMap;
+                if (objmtl.shadeless) mat.flags |= Material::SelfIlluminating;
+                if (objmtl.translucent) mat.flags |= Material::Translucent;
+                materials.push_back(mat);
+            }
         }
     };
 
     void OBJMesh::assemble(OBJShape* shape, S32 rootNode)
     {
         S32 f, v;
-        S32 materialIndex = 0; // use only one material
+        S32 materialIndex = -1; // use .mtl materials if any
 
         // Import vertex position and texture data
         // (flatten entire model to separate vertices)
         for (f = 0; f < shape->mObjFaces.size(); ++f) {
             OBJShape::Face& tri = shape->mObjFaces[f];
+            materialIndex = tri.material;
             Primitive prim;
 
             for (v = 0; v < 3; ++v) {
@@ -248,7 +390,9 @@ namespace DTS {
             prim.type         = Primitive::Indexed;
 
             if (materialIndex >= 0)
-                prim.type |= materialIndex;
+                prim.type |= (materialIndex + shape->mObjNeedDefaultMaterial) & Primitive::MaterialMask;
+            else
+                shape->mObjNeedDefaultMaterial = true;
 
             indices.push_back  (prim.firstElement);
             indices.push_back  (prim.firstElement + 2);
