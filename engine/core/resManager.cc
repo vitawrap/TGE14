@@ -766,7 +766,7 @@ ResourceInstance * ResManager::loadInstance (const char *fileName, bool computeC
 
 //------------------------------------------------------------------------------
 
-static const char *alwaysCRCList = ".ter.dif.dts.glb";
+static const char *alwaysCRCList = ".ter.dif.dts.glb.obj.mtl";
 
 ResourceInstance * ResManager::loadInstance (ResourceObject * obj, bool computeCRC)
 {
