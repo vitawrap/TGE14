@@ -100,7 +100,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\SDL\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\dtsSDK;$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\SDL\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_XKEYCHECK_H;UNICODE;TORQUE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -143,7 +143,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\SDL\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\dtsSDK;$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\SDL\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_XKEYCHECK_H;UNICODE;TORQUE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -190,7 +190,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\dtsSDK;$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_XKEYCHECK_H;UNICODE;TORQUE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -232,7 +232,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\dtsSDK;$(SolutionDir)..\lib\mimalloc;$(SolutionDir)..\lib\xiph\include;$(SolutionDir)..\lib\vorbis\include;$(SolutionDir)..\lib\zlib;$(SolutionDir)..\lib\lungif;$(SolutionDir)..\lib\lpng;$(SolutionDir)..\lib\ljpeg;$(SolutionDir)..\lib\openal\win32;$(SolutionDir)..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_XKEYCHECK_H;UNICODE;TORQUE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
