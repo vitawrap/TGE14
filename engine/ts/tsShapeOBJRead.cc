@@ -13,6 +13,7 @@
 
 // Steal DTS SDK for our purposes
 #include "../lib/dtsSDK/DTSShape.h"
+#include "../lib/dtsSDKPlus/stripper.h"
 
 //------------------------------------------------------
 // DTS interface
@@ -400,6 +401,12 @@ namespace DTS {
 
             primitives.push_back (prim);
         }
+
+        // Perform triangle stripping
+        Stripper stripper(primitives,indices);
+        stripper.setLimitStripLength(false);
+        stripper.makeStrips();
+        stripper.getStrips(primitives,indices);
 
         // Other stuff we don't support
         setFrames(1);
