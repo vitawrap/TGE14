@@ -170,7 +170,7 @@ namespace DTS
       std::vector <int>       vbone;      //!< Vertex vbone
       std::vector <float>     vweight;    //!< Vertex weight
       std::vector <int>       nodeIndex;  //!< vbone -> node
-      std::vector <Matrix<4,4> > nodeTransform;  //!< 
+      std::vector <Matrix<4,4> > nodeTransform;  //!< Initial inverse world transform for node
 
       // Extended data used by sort Meshes
 
