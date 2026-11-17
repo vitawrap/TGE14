@@ -35,7 +35,7 @@ Sun::Sun()
 void Sun::conformLight()
 {
    mLight.mDirection.normalize();
-   mLight.mColor.clamp();
+   //mLight.mColor.clamp(); // Allow color to be overblown or negative
    mLight.mAmbient.clamp();
 }
 
